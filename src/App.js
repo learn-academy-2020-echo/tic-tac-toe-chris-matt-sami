@@ -6,7 +6,11 @@ class App extends Component{
   constructor(props){
     super(props)
     this.state = {
-      squares: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+      squares: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+      count: 0,
+      player1: [],
+      player2: [],
+      winArray: [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]]
     }
   }
 
@@ -15,22 +19,7 @@ class App extends Component{
   //   this.setState({treasureLocation: treasure})
   // }
 
-  handleGamePlay = (index) => {
-    const { squares, treasureLocation } = this.state
-    if (index === treasureLocation){
-      squares[index] = "💰"
-      this.setState({ squares: squares })
-    } else {
-    squares[ index ] = "🌳"
-    this.setState({ squares: squares })
-    }
-  }
 
-    handleGamePlay = (index) => {
-      const { squares } = this.state
-      squares[ index ] = "🌳"
-      this.setState({ squares: squares })
-    }
 
     //PLAYER 1 + PLAYER 2
     //define player 1 and player 2 - set index = emoji
@@ -38,6 +27,32 @@ class App extends Component{
     //if count is %2 = 0 => emoji 1 (if even = p1)
     //else emoji 2 (if odd = p2)
     //players cant click a filled space
+
+  handleGamePlay = (index) => {
+    const { squares, player1, player2, count } = this.state
+      if(count >= 8){
+        console.log("tie game")
+        alert("tie game")
+      }else if (count % 2 === 0){
+      squares[index] = "🦠"
+      player1.push(index)
+      console.log("player1:", player1)
+      console.log("index", index)
+      console.log("count:", count)
+
+      this.setState({ squares: squares, count: count + 1, player1: player1 })
+
+    }else {
+      squares[ index ] = "🧼"
+      player2.push(index)
+      console.log("player2:", player2)
+      console.log("index", index)
+      console.log("count:", count)
+
+      this.setState({ squares: squares, count: count + 1, player2: player2 })
+    }
+  }
+
 
 
     //WIN CONDITIONS
@@ -53,6 +68,10 @@ class App extends Component{
 
     //RESTART GAME FUNCTION
     //if game WIN OR TIE => reset game
+
+    //CANNOT CLICK FILLED BOX
+    //Player 1 array cannot contain values in Player2 array
+    //Vice versa
     
 
 
@@ -61,7 +80,7 @@ class App extends Component{
     console.log("treasure:", this.state.treasureLocation)
     return(
       <React.Fragment>
-        <h1>Treasure Hunt App</h1>
+        <h1>TIC-TAC-TOE</h1>
         
         <div id="gameboard">
         { this.state.squares.map((value, index) => {
