@@ -20,7 +20,7 @@ This project will challenge your knowledge of React but should also be an exerci
 
 ## User Stories:
 
-- As a user, I should start off seeing a 3x3 grid on the main page.
+- As a user, I should start off seeing a 3x3 grid on the main page.DONE
 
 ![tic-tac-toe board](https://s3.amazonaws.com/learn-site/curriculum/tic-tac-toe-board.png)
 
